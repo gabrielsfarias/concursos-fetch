@@ -1,0 +1,38 @@
+{
+  "name": "concursos-fetch",
+  "version": "1.0.0",
+  "description": "Uma API para busca de resultados de concursos",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node --env-file=.env src/main.js",
+    "lint": "npx prettier . --write && npx eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielsfarias/concursos-fetch.git"
+  },
+  "keywords": [
+    "fetch",
+    "crawler",
+    "scrapping"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/gabrielsfarias/concursos-fetch/issues"
+  },
+  "homepage": "https://github.com/gabrielsfarias/concursos-fetch#readme",
+  "dependencies": {
+    "crawlee": "^3.5.7",
+    "puppeteer": "^21.3.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.0.3"
+  }
+}
