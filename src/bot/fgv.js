@@ -15,7 +15,7 @@ try {
 
 const crawlerFgv = new PuppeteerCrawler({
   requestQueue,
-  async requestHandler ({ page }) {
+  async requestHandler({ page }) {
     const links = await page.evaluate(() => {
       const divs = Array.from(document.querySelectorAll('div.views-row a'))
       return divs.map((a) => ({ text: a.textContent.trim(), href: a.href })).filter((a) => a.text && a.href)
@@ -67,7 +67,7 @@ const crawlerFgv = new PuppeteerCrawler({
     }
   },
 
-  async failedRequestHandler ({ request }) {
+  async failedRequestHandler({ request }) {
     log.debug(`Request failed: ${request.url}`)
     await fgv.pushData({
       url: request.url,
