@@ -1,3 +1,4 @@
-import { crawler } from '../bot/cesgranrio.js'
+import { crawlerCesgranrio } from './bot/cesgranrio.js'
+import { crawlerFgv } from './bot/fgv'
 
-export default crawler
+export default { crawlerFgv, crawlerCesgranrio }
