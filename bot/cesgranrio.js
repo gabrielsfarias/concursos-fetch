@@ -1,8 +1,8 @@
 import { Dataset, JSDOMCrawler, log } from 'crawlee'
 
 const arrObjetos = []
-const urlCesgranrio = 'https://www.cesgranrio.org.br/concursos/principal.aspx'
-const crawler = new JSDOMCrawler({
+const url = 'https://www.cesgranrio.org.br/concursos/principal.aspx'
+const crawlerCesgranrio = new JSDOMCrawler({
   minConcurrency: 10,
   maxConcurrency: 50,
   maxRequestRetries: 1,
@@ -24,7 +24,7 @@ const crawler = new JSDOMCrawler({
     }
     const cesgranrio = await Dataset.open('cesgranrio')
     await cesgranrio.pushData(arrObjetos)
-    cesgranrio.exportToCSV('cesgranrio', cesgranrio)
+    await cesgranrio.exportToCSV('cesgranrio')
     return arrObjetos
   },
 
@@ -33,6 +33,6 @@ const crawler = new JSDOMCrawler({
   }
 })
 
-await crawler.run([urlCesgranrio])
+await crawlerCesgranrio.run([url])
 
-export { crawler }
+export { crawlerCesgranrio }
