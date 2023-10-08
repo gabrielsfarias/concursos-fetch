@@ -1,50 +1,33 @@
-import { CheerioCrawler, RequestQueue } from 'crawlee'
-import { gotScraping } from 'got-scraping'
+import { PuppeteerCrawler } from 'crawlee'
 
-const url = 'https://www.concursosfcc.com.br/'
-const crawler = new CheerioCrawler({
-  async requestHandler({ request, $, enqueueLinks, log }) {
+const allLinks = new Set()
+
+const crawler = new PuppeteerCrawler({
+  async requestHandler({ request, page, log }) {
     log.info(`Crawling ${request.url}`)
 
-    // Get all links from the page
-    const links = []
-    $('a[href]').each((index, el) => {
-      const link = $(el).attr('href')
-      if (link.startsWith(url)) {
-        links.push(link)
-      }
-    })
+    // Define the selector based on the URL of the current page
+    const selector = '#refazerLista div div div a[href]'
 
-    const requestOptions = []
-    for (const link of links) {
-      try {
-        const response = await gotScraping.head(link)
-        const contentType = response.headers['content-type']
-        if (
-          contentType.startsWith('text/html') ||
-          contentType.startsWith('text/xml') ||
-          contentType.startsWith('application/xhtml+xml') ||
-          contentType.startsWith('application/xml') ||
-          contentType.startsWith('application/json')
-        ) {
-          requestOptions.push({ url: link })
-        }
-      } catch (error) {
-        log.error(`Error checking content type of ${link}: ${error}`)
+    try {
+      // Get all links from the page that match the selector
+      const links = await page.$$eval(selector, (links) => links.map((link) => link.href))
+
+      log.info(`Links: ${links}`)
+
+      // Add each link to the allLinks set
+      for (const link of links) {
+        allLinks.add(link)
       }
+    } catch (error) {
+      log.error(`Error occurred while crawling ${request.url}: ${error.message}`)
     }
-
-    const queue = await RequestQueue.open()
-    await queue.addRequests(requestOptions)
-
-    await enqueueLinks({
-      baseUrl: url,
-      requestQueue: queue,
-      selector: 'a[href]',
-      globs: [`${url}concursoAndamento.html/*`, `${url}concursoOutraSituacao.html/*`]
-    })
-    return requestOptions
   }
 })
 
-await crawler.run([url])
+await crawler.run([
+  'https://www.concursosfcc.com.br/concursoAndamento.html',
+  'https://www.concursosfcc.com.br/concursoOutraSituacao.html'
+])
+
+console.log('All unique links:', Array.from(allLinks))
