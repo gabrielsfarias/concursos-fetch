@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Uma API para busca de resultados de concursos",
   "type": "module",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node --env-file=.env src/main.js",
+    "start": "node --env-file=.env src/index.js",
     "lint": "npx prettier . --write && npx eslint . --fix"
   },
   "repository": {
