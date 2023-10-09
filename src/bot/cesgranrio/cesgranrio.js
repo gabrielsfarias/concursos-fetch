@@ -9,7 +9,7 @@ const crawlerCesgranrio = new JSDOMCrawler({
   requestHandlerTimeoutSecs: 30,
   maxRequestsPerCrawl: 10,
 
-  async requestHandler({ request, window }) {
+  async requestHandler ({ request, window }) {
     log.info(`Processando ${request.url}...`)
 
     const caixaCinzaCenter = window.document.querySelectorAll('div.caixa_cinza_center')
@@ -28,7 +28,7 @@ const crawlerCesgranrio = new JSDOMCrawler({
     return arrObjetos
   },
 
-  failedRequestHandler({ request }) {
+  failedRequestHandler ({ request }) {
     log.info(`Request ${request.url} failed twice.`)
   }
 })

@@ -1,6 +1,6 @@
 import { CheerioCrawler } from 'crawlee'
-import { router } from '../src/bot/fcc/routes.js'
-import { BASE_URL } from '../src/constants.js'
+import { BASE_URL } from '../../constants.js'
+import { router } from './routes.js'
 
 const startUrls = [`${BASE_URL.fcc}/concursoOutraSituacao.html`, `${BASE_URL.fcc}/concursoAndamento.html`]
 
