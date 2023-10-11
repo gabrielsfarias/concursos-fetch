@@ -6,9 +6,8 @@ import { ConnectionFailedError } from '../../errors/connectionFailed.js'
 import { RequestTimeoutError } from '../../errors/requestTimeout.js'
 import { UpsertError } from '../../errors/upsert.js'
 
-const endpoint = process.env.COSMOS_DB_ENDPOINT
-const key = process.env.COSMOS_DB_KEY
-const cosmosClient = new CosmosClient({ endpoint, key, connectionPolicy: { requestTimeout: 90 } })
+const connectionString = process.env.CosmosDBConnectionString
+const cosmosClient = new CosmosClient({ connectionString, connectionPolicy: { requestTimeout: 90 } })
 
 let database
 let container
