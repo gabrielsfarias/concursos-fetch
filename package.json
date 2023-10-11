@@ -1,11 +1,11 @@
 {
   "name": "concursos-fetch",
   "version": "1.0.0",
-  "description": "Uma API para busca de resultados de concursos",
   "type": "module",
-  "main": "index.js",
+  "description": "Uma API para busca de resultados de concursos",
+  "main": "src/functions/**/index.js",
   "scripts": {
-    "start": "node --env-file=.env src/index.js",
+    "start": "func start",
     "lint": "npx prettier . --write && npx eslint . --fix"
   },
   "repository": {
@@ -24,9 +24,10 @@
   },
   "homepage": "https://github.com/gabrielsfarias/concursos-fetch#readme",
   "dependencies": {
+    "@azure/cosmos": "^4.0.0",
     "@azure/functions": "^4.0.1",
     "crawlee": "^3.5.7",
-    "puppeteer": "^21.3.7"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
