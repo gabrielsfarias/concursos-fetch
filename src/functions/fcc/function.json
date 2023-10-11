@@ -1,0 +1,10 @@
+{
+  "bindings": [
+    {
+      "name": "FCC",
+      "type": "timerTrigger",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../../src/functions/fcc/index.js"
+}
