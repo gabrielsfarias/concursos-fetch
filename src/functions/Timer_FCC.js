@@ -1,10 +1,10 @@
 import { CosmosClient } from '@azure/cosmos'
 import { app } from '@azure/functions'
 import { CheerioCrawler, createCheerioRouter } from 'crawlee'
-import { BASE_URL, bancas } from '../../constants.js'
 import { ConnectionFailedError } from '../../errors/connectionFailed.js'
 import { RequestTimeoutError } from '../../errors/requestTimeout.js'
 import { UpsertError } from '../../errors/upsert.js'
+import { BASE_URL, bancas } from '../../utils/constants.js'
 
 const connectionString = process.env.CosmosDBConnectionString
 const cosmosClient = new CosmosClient({ connectionString, connectionPolicy: { requestTimeout: 90 } })
